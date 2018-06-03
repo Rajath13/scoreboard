@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Scoreboard{% endblock %}</title>
+    
+    {% load static %}
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="stylesheet" media="screen" href="{% static 'score/css/bootstrap.css' %}">    
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center">Scoreboard</h1>
+        </div>
+        <div class="row">
+            
+        </div>
+    </div>
+    {% block body %}
+    {% endblock %}
+    {%load static%}
+    <script src="{% static 'score/js/jquery.js'%}"></script>
+    <script src="{% static 'score/js/bootstrap.js'%}"></script>
+</body>
+</html>

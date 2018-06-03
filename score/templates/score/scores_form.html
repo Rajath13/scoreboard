@@ -1,0 +1,20 @@
+{% extends 'score/base.html'%}
+{% block title %}Scoreboard{% endblock %}
+{% block body%}
+<section> 
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-md-offset-2 col-lg-offset-2">
+                <form action="" method="POST" role="form">
+                    {% csrf_token %}                    
+                    {% include 'score/form_template.html' %}       
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>            
+        </div>
+    </div>
+    <p class="text-center"><a href="{% url 'score:results' %}">Results</a></p>
+</section>
+{% endblock %}
