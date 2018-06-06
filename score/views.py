@@ -10,7 +10,7 @@ from .models import Scores
 class ScoresCreate(CreateView):
     """ View for the form on Scores Model"""
     model = Scores
-    fields = ['Abhinav', 'Harshith', 'Rajath', 'Winner', 'deal']
+    fields = ['Session', 'Abhinav', 'Harshith', 'Rajath', 'Winner', 'deal']
 
 def results(request):
     """ Results view"""
@@ -22,9 +22,12 @@ def results(request):
     abhinav_sum = Scores.objects.aggregate(Sum('Abhinav'))
     harshith_sum = Scores.objects.aggregate(Sum('Harshith'))
     rajath_sum = Scores.objects.aggregate(Sum('Rajath'))
-    abhinav_sum_date = Scores.objects.values('Date').annotate(Sum('Abhinav'))
-    harshith_sum_date = Scores.objects.values('Date').annotate(Sum('Harshith'))
-    rajath_sum_date = Scores.objects.values('Date').annotate(Sum('Rajath'))
+    sum_date = Scores.objects.values('Date').annotate(
+        Sum('Abhinav'), Sum('Harshith'), Sum('Rajath')
+    )
+    sum_session = Scores.objects.values('Session').annotate(
+        Sum('Abhinav'), Sum('Harshith'), Sum('Rajath')
+    )
     abhinav_wins = Scores.objects.filter(Winner='Abhinav').count()
     harshith_wins = Scores.objects.filter(Winner='Harshith').count()
     rajath_wins = Scores.objects.filter(Winner='Rajath').count()
@@ -34,6 +37,9 @@ def results(request):
     abhinav_deals = Scores.objects.filter(deal='Y').filter(Winner='Abhinav').count()
     harshith_deals = Scores.objects.filter(deal='Y').filter(Winner='Harshith').count()
     rajath_deals = Scores.objects.filter(deal='Y').filter(Winner='Rajath').count()
+    abhinav_session_win = 0
+    harshith_session_win = 0
+    rajath_session_win = 0
 
     context = {
         'all_scores':all_scores,
@@ -53,8 +59,10 @@ def results(request):
         'abhinav_deals':abhinav_deals,
         'harshith_deals':harshith_deals,
         'rajath_deals':rajath_deals,
-        'abhinav_sum_date': abhinav_sum_date,
-        'harshith_sum_date' : harshith_sum_date,
-        'rajath_sum_date' : rajath_sum_date
+        'sum_date': sum_date,
+        "sum_session" : sum_session,
+        'abhinav_session_win': abhinav_session_win,
+        'harshith_session_win': harshith_session_win,
+        'rajath_session_win': rajath_session_win
     }
     return render(request, 'score/results.html', context=context)

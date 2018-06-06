@@ -97,52 +97,53 @@
             </table>
         </div>
     </div>
-    <div class="  col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
         <div class="card">
-            <h3 class="text-center">Abhinav Score by date</h3>
+            <h3 class="text-center">Score by Session</h3>
+            <table class="table table-responsive table-bordered">
+                <tr>
+                    <td>Session</td>
+                    <td>Abhinav</td>
+                    <td>Harshith</td>
+                    <td>Rajath</td>
+                    <td>Winner</td>
+                </tr>
+                {% for score in sum_session %}
+                    <tr>
+                        <td>{{ score.Session }}</td>
+                        <td>{{ score.Abhinav__sum }}</td>
+                        <td>{{ score.Harshith__sum }}</td>
+                        <td>{{ score.Rajath__sum }}</td>
+                        <td>
+                            {% if score.Abhinav__sum < score.Harshith__sum and score.Abhinav__sum < score.Rajath__sum %}
+                                Abhinav
+                            {% elif score.Harshith__sum < score.Abhinav__sum and score.Harshith__sum < score.Rajath__sum %}
+                                Harshith
+                            {% elif score.Rajath__sum < score.Abhinav__sum and score.Rajath__sum < score.Harshith__sum %}
+                                Rajath
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="card">
+            <h3 class="text-center">Scores by date</h3>
             <table class="table table-responsive table-bordered">
                 <tr>
                     <td>Date</td>
                     <td>Abhinav</td>
+                    <td>Harshith</td>
+                    <td>Rajath</td>
                 </tr>
-                {% for score in abhinav_sum_date %}
+                {% for score in sum_date %}
                     <tr>
                         <td>{{ score.Date }}</td>
                         <td>{{ score.Abhinav__sum }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-        <div class="card">
-            <h3 class="text-center">Harshith Score by date</h3>
-            <table class="table table-responsive table-bordered">
-                <tr>
-                    <td>Date</td>
-                    <td>Harshith</td>
-                </tr>
-                {% for scores in harshith_sum_date %}
-                    <tr>
-                        <td>{{ scores.Date}}</td> 
-                        <td>{{ scores.Harshith__sum }} </td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-        <div class="card">
-            <h3 class="text-center">Rajath Score by date</h3>
-            <table class="table table-responsive table-bordered">
-                <tr>
-                    <td>Date</td>
-                    <td>Rajath</td>
-                </tr>
-                {% for scores in rajath_sum_date %}
-                    <tr>
-                        <td>{{ scores.Date}}</td>
-                        <td>{{ scores.Rajath__sum }} </td>
+                        <td>{{ score.Harshith__sum }}</td>
+                        <td>{{ score.Rajath__sum }}</td>
                     </tr>
                 {% endfor %}
             </table>
@@ -154,6 +155,7 @@
             <table class="table table-responsive table-bordered" id="all-results">
                 <tr>
                     <td>Date</td>
+                    <td>Session</td>
                     <td>Game No</td>
                     <td>Abhinav</td>
                     <td>Harshith</td>
@@ -163,6 +165,7 @@
                 {% for scores in all_scores %}
                     <tr>
                         <td>{{ scores.Date}}</td>
+                        <td>{{ scores.Session }}</td>
                         <td>{{ scores.Game_No}} </td>
                         <td>{{ scores.Abhinav }} </td> 
                         <td>{{ scores.Harshith }} </td>

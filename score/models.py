@@ -8,6 +8,7 @@ class Scores(models.Model):
     """Model for the scoreboard"""
     Game_No = models.AutoField(primary_key=True)
     Date = models.DateField(default=date.today)
+    Session = models.IntegerField(default=0)
     Abhinav = models.IntegerField()
     Harshith = models.IntegerField()
     Rajath = models.IntegerField()
