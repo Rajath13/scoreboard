@@ -1,5 +1,179 @@
 {% extends 'score/base.html'%}
 {% block title %}Results{% endblock %}
 {% block body%}
-<h3 class="text-center">Results</h3>
+{% comment %} <h3 class="text-center">Results</h3> {% endcomment %}
+<p class="text-center"><a href="{% url 'score:index' %}">Home</a></p>
+{% if all_scores %}
+    
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card">
+            <h3 class="text-center">Total games</h3>
+            <h4 class="text-center">{{ game_count }}</h4>
+        </div>
+    </div>    
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="card">
+            <h3 class="text-center">Abhinav Wins</h3>
+            <h4 class="text-center">{{ abhinav_wins }}</h4>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="card">
+            <h3 class="text-center">Harshith Wins</h3>
+            <h4 class="text-center">{{ harshith_wins }}</h4>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="card">
+            <h3 class="text-center">Rajath Wins</h3>
+            <h4 class="text-center">{{ rajath_wins }}</h4>
+        </div>
+    </div>
+    <div class="  col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="card">
+            <h3 class="text-center">Averages</h3>
+            <table class="table table-responsive table-bordered">
+                <tr>
+                    <td>Abhinav</td>
+                    <td>Harshith</td>
+                    <td>Rajath</td>
+                </tr>
+                <tr>
+                    <td>{{ abhinav_avg }}</td>
+                    <td>{{ harshith_avg }}</td>
+                    <td>{{ rajath_avg }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="card">
+            <h3 class="text-center">Total Scores</h3>
+            <table class="table table-responsive table-bordered">
+                <tr>
+                    <td>Abhinav</td>
+                    <td>Harshith</td>
+                    <td>Rajath</td>
+                </tr>
+                <tr>
+                    <td>{{ abhinav_sum }}</td>
+                    <td>{{ harshith_sum }}</td>
+                    <td>{{ rajath_sum }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="card">
+            <h3 class="text-center">Total eighties</h3>
+            <table class="table table-responsive table-bordered">
+                <tr>
+                    <td>Abhinav</td>
+                    <td>Harshith</td>
+                    <td>Rajath</td>
+                </tr>
+                <tr>
+                    <td>{{ abhinav_eighties }}</td>
+                    <td>{{ harshith_eighties }}</td>
+                    <td>{{ rajath_eighties }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="card">
+            <h3 class="text-center">Total deals</h3>
+            <table class="table table-responsive table-bordered">
+                <tr>
+                    <td>Abhinav</td>
+                    <td>Harshith</td>
+                    <td>Rajath</td>
+                </tr>
+                <tr>
+                    <td>{{ abhinav_deals }}</td>
+                    <td>{{ harshith_deals }}</td>
+                    <td>{{ rajath_deals }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="  col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="card">
+            <h3 class="text-center">Abhinav Score by date</h3>
+            <table class="table table-responsive table-bordered">
+                <tr>
+                    <td>Date</td>
+                    <td>Abhinav</td>
+                </tr>
+                {% for score in abhinav_sum_date %}
+                    <tr>
+                        <td>{{ score.Date }}</td>
+                        <td>{{ score.Abhinav__sum }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="card">
+            <h3 class="text-center">Harshith Score by date</h3>
+            <table class="table table-responsive table-bordered">
+                <tr>
+                    <td>Date</td>
+                    <td>Harshith</td>
+                </tr>
+                {% for scores in harshith_sum_date %}
+                    <tr>
+                        <td>{{ scores.Date}}</td> 
+                        <td>{{ scores.Harshith__sum }} </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="card">
+            <h3 class="text-center">Rajath Score by date</h3>
+            <table class="table table-responsive table-bordered">
+                <tr>
+                    <td>Date</td>
+                    <td>Rajath</td>
+                </tr>
+                {% for scores in rajath_sum_date %}
+                    <tr>
+                        <td>{{ scores.Date}}</td>
+                        <td>{{ scores.Rajath__sum }} </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card last-card">
+            <h3 class="text-center">All results</h3>
+            <table class="table table-responsive table-bordered" id="all-results">
+                <tr>
+                    <td>Date</td>
+                    <td>Game No</td>
+                    <td>Abhinav</td>
+                    <td>Harshith</td>
+                    <td>Rajath</td>
+                    <td>Winner</td>
+                </tr>
+                {% for scores in all_scores %}
+                    <tr>
+                        <td>{{ scores.Date}}</td>
+                        <td>{{ scores.Game_No}} </td>
+                        <td>{{ scores.Abhinav }} </td> 
+                        <td>{{ scores.Harshith }} </td>
+                        <td>{{ scores.Rajath }} </td>   
+                        <td>{{ scores.Winner }}</td>
+                    </tr>
+                {% endfor %}
+            </table>   
+        </div>
+    </div> 
+{% else %}
+    <h3 class="text-center">No Results</h3>
+{% endif %}
 {% endblock %}

@@ -1,3 +1,4 @@
+"""Url path and include modules for routing views"""
 from django.urls import path, include
 from . import views
 

@@ -8,17 +8,20 @@
     
     {% load static %}
     <!-- Latest compiled and minified CSS & JS -->
-    <link rel="stylesheet" media="screen" href="{% static 'score/css/bootstrap.css' %}">    
+    <link rel="stylesheet" media="screen" href="{% static 'score/css/bootstrap.css' %}"> 
+    <link rel="stylesheet" media="screen" href="{% static 'score/css/style.css' %}">    
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <h1 class="text-center">Scoreboard</h1>
+    <section> 
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center">Scoreboard</h1>
+            </div>
+            <div class="row">
+                
+            </div>
         </div>
-        <div class="row">
-            
-        </div>
-    </div>
+    </section>
     {% block body %}
     {% endblock %}
     {%load static%}
