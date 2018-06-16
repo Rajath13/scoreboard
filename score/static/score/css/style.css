@@ -4,9 +4,6 @@ body{
 table tr td {
     text-align: center;
 }
-table#all-results{
-    max-height:10px;
-}
 div.card{
     padding: 0 10px;
     margin-top: 10px;
@@ -14,11 +11,8 @@ div.card{
     border-radius: 10px; 
     background-color: white;
     box-shadow: 5px 5px 25px 0 rgba(46,61,73,.2);
+    overflow: auto;
 }
 div.card:hover{
     box-shadow: 2px 4px 8px 0 rgba(46,61,73,.2);
-}
-div.last-card{
-    max-height: 600px;
-    overflow-y: auto;
 }

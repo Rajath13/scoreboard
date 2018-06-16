@@ -1,7 +1,7 @@
 """Render module to render templates , Create View module to create a form for Scores Model"""
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
-from django.db.models import Sum, Avg
+from django.db.models import Sum, Avg, Count
 from .models import Scores
 
 # Create your views here.
@@ -14,7 +14,7 @@ class ScoresCreate(CreateView):
 
 def results(request):
     """ Results view"""
-    all_scores = Scores.objects.all()
+    all_scores = Scores.objects.all()    
     game_count = Scores.objects.count()
     abhinav_avg = Scores.objects.aggregate(Avg('Abhinav'))
     harshith_avg = Scores.objects.aggregate(Avg('Harshith'))
@@ -34,6 +34,9 @@ def results(request):
     abhinav_eighties = Scores.objects.filter(Abhinav=80).count()
     harshith_eighties = Scores.objects.filter(Harshith=80).count()
     rajath_eighties = Scores.objects.filter(Rajath=80).count()
+    abhinav_eighties_session = Scores.objects.values('Session').filter(Abhinav=80).annotate(Count('Abhinav'))
+    harshith_eighties_session = Scores.objects.values('Session').filter(Harshith=80).annotate(Count('Harshith'))
+    rajath_eighties_session = Scores.objects.values('Session').filter(Rajath=80).annotate(Count('Rajath'))
     abhinav_deals = Scores.objects.filter(deal='Y').filter(Winner='Abhinav').count()
     harshith_deals = Scores.objects.filter(deal='Y').filter(Winner='Harshith').count()
     rajath_deals = Scores.objects.filter(deal='Y').filter(Winner='Rajath').count()
@@ -56,6 +59,9 @@ def results(request):
         'abhinav_eighties':abhinav_eighties,
         'harshith_eighties':harshith_eighties,
         'rajath_eighties':rajath_eighties,
+        'abhinav_eighties_session':abhinav_eighties_session,
+        'harshith_eighties_session':harshith_eighties_session,
+        'rajath_eighties_session':rajath_eighties_session,
         'abhinav_deals':abhinav_deals,
         'harshith_deals':harshith_deals,
         'rajath_deals':rajath_deals,
@@ -66,3 +72,11 @@ def results(request):
         'rajath_session_win': rajath_session_win
     }
     return render(request, 'score/results.html', context=context)
+
+def allresults(request):
+    """All Results Page"""
+    all_scores = Scores.objects.all()
+    context = {
+        'all_scores' : all_scores
+    }
+    return render(request, 'score/allresults.html', context=context)

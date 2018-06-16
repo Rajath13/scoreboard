@@ -6,5 +6,6 @@ app_name = "score"
 
 urlpatterns = [
     path('', views.ScoresCreate.as_view(), name='index'),
-    path('results/', views.results, name='results')
+    path('results/', views.results, name='results'),
+    path('allresults/', views.allresults, name='allresults')
 ]

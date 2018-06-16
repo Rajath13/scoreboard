@@ -1,8 +1,8 @@
 {% extends 'score/base.html'%}
 {% block title %}Results{% endblock %}
 {% block body%}
-{% comment %} <h3 class="text-center">Results</h3> {% endcomment %}
-<p class="text-center"><a href="{% url 'score:index' %}">Home</a></p>
+<h3 class="text-center">Results</h3>
+<p class="text-center"><a href="{% url 'score:index' %}">Home</a>&nbsp;|&nbsp;<a href="{% url 'score:allresults'%}">All results</a></p>
 {% if all_scores %}
     
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -149,33 +149,62 @@
             </table>
         </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="card last-card">
-            <h3 class="text-center">All results</h3>
-            <table class="table table-responsive table-bordered" id="all-results">
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="card">
+            <h3 class="text-center">Abhinav 80's by Session</h3>
+            <table class="table table-responsive table-bordered">
                 <tr>
-                    <td>Date</td>
                     <td>Session</td>
-                    <td>Game No</td>
-                    <td>Abhinav</td>
-                    <td>Harshith</td>
-                    <td>Rajath</td>
-                    <td>Winner</td>
+                    <td>Eighties</td>
                 </tr>
-                {% for scores in all_scores %}
+                {% for score in abhinav_eighties_session %}
                     <tr>
-                        <td>{{ scores.Date}}</td>
-                        <td>{{ scores.Session }}</td>
-                        <td>{{ scores.Game_No}} </td>
-                        <td>{{ scores.Abhinav }} </td> 
-                        <td>{{ scores.Harshith }} </td>
-                        <td>{{ scores.Rajath }} </td>   
-                        <td>{{ scores.Winner }}</td>
+                        <td>{{ score.Session }}</td>
+                        <td>{{ score.Abhinav__count }}</td>
                     </tr>
                 {% endfor %}
-            </table>   
+            </table>
         </div>
-    </div> 
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="card">
+            <h3 class="text-center">Harshith 80's by Session</h3>
+            <table class="table table-responsive table-bordered">
+                <tr>
+                    <td>Session</td>
+                    <td>Eighties</td>
+                </tr>
+                {% for score in harshith_eighties_session %}
+                    <tr>
+                        <td>{{ score.Session }}</td>
+                        <td>{{ score.Harshith__count }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="card">
+            <h3 class="text-center">Rajath 80's by Session</h3>
+            <table class="table table-responsive table-bordered">
+                <tr>
+                    <td>Session</td>
+                    <td>Eighties</td>
+                </tr>
+                {% for score in rajath_eighties_session %}
+                    <tr>
+                        <td>{{ score.Session }}</td>
+                        <td>{{ score.Rajath__count }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <br>
+        <p class="text-center"><a href="{% url 'score:index' %}">Home</a>&nbsp;|&nbsp;<a href="{% url 'score:allresults'%}">All results</a></p>
+        <br>
+    </div>    
 {% else %}
     <h3 class="text-center">No Results</h3>
 {% endif %}

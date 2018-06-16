@@ -1,0 +1,44 @@
+{% extends 'score/base.html' %}
+{% block title %}Results{% endblock %}
+{% block body%}
+<h3 class="text-center">All Results</h3>
+<p class="text-center"><a href="{% url 'score:index' %}">Home</a>&nbsp;|&nbsp;<a href="{% url 'score:results'%}">Results</a></p>
+{% if all_scores %}
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="card last-card">
+            <h3></h3>
+            <table class="table table-responsive table-bordered" id="all-results">
+                <tr>
+                    <td>Date</td>
+                    <td>Session</td>
+                    <td>Game No</td>
+                    <td>Abhinav</td>
+                    <td>Harshith</td>
+                    <td>Rajath</td>
+                    <td>Winner</td>
+                </tr>
+                {% for scores in all_scores %}
+                    <tr>
+                        <td>{{ scores.Date}}</td>
+                        <td>{{ scores.Session }}</td>
+                        <td>{{ scores.Game_No}} </td>
+                        <td>{{ scores.Abhinav }} </td> 
+                        <td>{{ scores.Harshith }} </td>
+                        <td>{{ scores.Rajath }} </td>   
+                        <td>{{ scores.Winner }}</td>
+                    </tr>
+                {% endfor %}
+            </table>   
+        </div>
+    </div>
+    
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <br>
+        <p class="text-center"><a href="{% url 'score:index' %}">Home</a>&nbsp;|&nbsp;<a href="{% url 'score:results'%}">Results</a></p>
+        <br>
+    </div>
+     
+{% else %}
+    <h3 class="text-center">No Results</h3>
+{% endif %}
+{% endblock %}
